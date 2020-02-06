@@ -30,23 +30,13 @@ public class PixyCam extends SubsystemBase {
   }
 
   public double getBlockX(int index){
-    try{
-      ArrayList<Block> blocks = pixycam.getCCC().getBlocks(); //assign the data to an ArrayList for convinience
-      return blocks.get(index).getX();
-    } catch(Exception exception){
-      System.out.println("failed with exception");
-      return 0;
-    }
+    ArrayList<Block> blocks = pixycam.getCCC().getBlocks(); //assign the data to an ArrayList for convinience
+    return blocks.get(index).getX();
   }
 
   public double getBlockY(int index){
-    try{
-      ArrayList<Block> blocks = pixycam.getCCC().getBlocks(); //assign the data to an ArrayList for convinience
-      return blocks.get(index).getY();
-    } catch(Exception exception){
-      System.out.println("failed with exception");
-      return 0;
-    }
+    ArrayList<Block> blocks = pixycam.getCCC().getBlocks(); //assign the data to an ArrayList for convinience
+    return blocks.get(index).getY();
   }
 
   @Override
