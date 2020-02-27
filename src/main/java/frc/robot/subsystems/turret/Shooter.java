@@ -5,7 +5,7 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.subsystems;
+package frc.robot.subsystems.turret;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
@@ -17,6 +17,8 @@ import frc.robot.models.BobTalonFX;
 import frc.robot.models.MotionParameters;
 import frc.robot.models.PhoenixGains;
 
+
+
 public class Shooter extends SubsystemBase {
   private BobTalonFX shooterLead = new BobTalonFX(11);
   private BobTalonFX shooterFollow = new BobTalonFX(12);
@@ -26,9 +28,7 @@ public class Shooter extends SubsystemBase {
 
   //private DoubleSolenoid hoodSolenoid = new DoubleSolenoid(2, 3);
 
-  /**
-   * Creates a new Shooter.
-   */
+   
   public Shooter() {
 
     // this.shooterFollow.follow(shooterLead);

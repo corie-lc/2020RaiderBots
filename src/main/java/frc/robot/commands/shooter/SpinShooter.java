@@ -17,7 +17,7 @@ public class SpinShooter extends CommandBase {
   private double shooterSetpoint = 0.35;
 
   public SpinShooter(ControlMode controlMode, double setpoint) {
-    addRequirements(Robot.shooter);
+   // addRequirements(Robot.shooter);
     this.shooterSetpoint = setpoint;
     this.controlMode = controlMode;
     // Use addRequirements() here to declare subsystem dependencies.
@@ -26,7 +26,7 @@ public class SpinShooter extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    Robot.shooter.set(controlMode, shooterSetpoint);
+   // Robot.shooter.set(controlMode, shooterSetpoint);
   }
 
   // Called every time the scheduler runs while the command is scheduled.

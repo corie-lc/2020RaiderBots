@@ -7,24 +7,18 @@
 
 package frc.robot;
 
-import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.TimedRobot;
-import edu.wpi.first.wpilibj.SPI.Port;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.subsystems.ControlPanelSpinner;
 import frc.robot.subsystems.Drivetrain;
-import frc.robot.subsystems.Shooter;
-import frc.robot.subsystems.Turret;
-import io.github.pseudoresonance.pixy2api.links.SPILink;
-import frc.robot.subsystems.Intake;
-import frc.robot.subsystems.InternalBallDrive;
-import frc.robot.subsystems.Lifter;
-import frc.robot.subsystems.PixyCam;
-import frc.robot.subsystems.ServoHolder;
+import frc.robot.subsystems.vision.*;
+import frc.robot.subsystems.lifter.*;
+import frc.robot.subsystems.turret.Turret;
+import frc.robot.subsystems.ballcollection.*;
 
 public class Robot extends TimedRobot {
-  public static Shooter shooter = new Shooter();
+  //public static Shooter shooter = new Shooter();
   public static Intake intake = new Intake();
   public static InternalBallDrive internalBallDrive = new InternalBallDrive();
   public static ControlPanelSpinner controlPanelSpinner = new ControlPanelSpinner();
@@ -32,44 +26,27 @@ public class Robot extends TimedRobot {
   public static Lifter lifter = new Lifter();
   public static PixyCam pixyCam = new PixyCam();
   public static ServoHolder servoHolder = new ServoHolder();
+  //public static Pneumatics pneumatics = new Pneumatics();
   public static OI oi;
   public static Drivetrain driveTrain;
   private Command m_autonomousCommand;
   private RobotContainer m_robotContainer;
+  String gameData;
 
-  public SPI spi = new SPI(Port.kOnboardCS1);
 
-  
-  /**
-   * This function is run when the robot is first started up and should be used
-   * for any initialization code.
-   */
   @Override
   public void robotInit() {
     driveTrain = new Drivetrain();
     m_robotContainer = new RobotContainer();
     oi = new OI();
-    //pixycam = Pixy2.createInstance(Pixy2.LinkType.SPI);
   }
 
-  /**
-   * This function is called every robot packet, no matter the mode. Use this for
-   * items like diagnostics that you want ran during disabled, autonomous,
-   * teleoperated and test.
-   *
-   * <p>
-   * This runs after the mode specific periodic functions, but before LiveWindow
-   * and SmartDashboard integrated updating.
-   */
   @Override
   public void robotPeriodic() {
-    spi.setChipSelectActiveHigh();
+    
     CommandScheduler.getInstance().run();
   }
 
-  /**
-   * This function is called once each time the robot enters Disabled mode.
-   */
   @Override
   public void disabledInit() {
   }

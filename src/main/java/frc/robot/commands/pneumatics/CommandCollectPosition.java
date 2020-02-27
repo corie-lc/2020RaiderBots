@@ -5,16 +5,18 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands.servoholder;
+package frc.robot.commands.pneumatics;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Robot;
 
-public class CommandServoHolder extends CommandBase {
-  double angleValue = 0;
-
-  public CommandServoHolder() {
-    addRequirements(Robot.servoHolder);
+public class CommandCollectPosition extends CommandBase {
+  /**
+   * Creates a new CommandCollectPosition.
+   */
+  public CommandCollectPosition() {
+    // Use addRequirements() here to declare subsystem dependencies.
+   // addRequirements(Robot.pneumatics);
   }
 
   // Called when the command is initially scheduled.
@@ -25,7 +27,7 @@ public class CommandServoHolder extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    Robot.servoHolder.servoSet();
+   // Robot.pneumatics.extendSolenoid(true);
   }
 
   // Called once the command ends or is interrupted.

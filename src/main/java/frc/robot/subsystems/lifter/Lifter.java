@@ -5,28 +5,29 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.subsystems;
+package frc.robot.subsystems.lifter;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Robot;
 
-public class Intake extends SubsystemBase {
-  private WPI_TalonSRX intakeRoller = new WPI_TalonSRX(5);
+public class Lifter extends SubsystemBase {
+  private WPI_TalonSRX lifter = new WPI_TalonSRX(9);
   /**
-   * Creates a new Intake.
+   * Creates a new Lifter.
    */
-  public Intake() {
+  public Lifter() {
 
   }
 
-  public void set(ControlMode controlMode, double percentage) {
-    intakeRoller.set(controlMode, percentage);
+  public void set(ControlMode controlMode, double percentage){
+    lifter.set(controlMode, percentage);
   }
 
   @Override
   public void periodic() {
-    // This method will be called once per scheduler run
+    this.set(ControlMode.PercentOutput, Robot.oi.operatorController.leftStick.getY());
   }
 }

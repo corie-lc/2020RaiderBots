@@ -47,7 +47,7 @@ public class Drivetrain extends SubsystemBase {
 
   public void drive() {
    //this.drive(Robot.oi.operatorController.leftStick.getY(), Robot.oi.operatorController.leftStick.getX());
-   driveTrain.arcadeDrive(- Robot.oi.operatorController.leftStick.getY(), Robot.oi.operatorController.leftStick.getX());
+   driveTrain.arcadeDrive(- Robot.oi.driverController.leftStick.getY(), Robot.oi.driverController.leftStick.getX());
   }
 
   @Override

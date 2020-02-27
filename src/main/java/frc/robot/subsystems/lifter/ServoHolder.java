@@ -5,25 +5,28 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.subsystems;
+package frc.robot.subsystems.lifter;
 
-import com.ctre.phoenix.motorcontrol.ControlMode;
-import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
-
+import edu.wpi.first.wpilibj.Servo;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
-public class Lifter extends SubsystemBase {
-  private WPI_TalonSRX lifter = new WPI_TalonSRX(10);
-  /**
-   * Creates a new Lifter.
-   */
-  public Lifter() {
+public class ServoHolder extends SubsystemBase {
+   Servo servoHolder;
+   double servoPosition = 0;
 
+  public ServoHolder() {
+    servoHolder = new Servo(0);
   }
 
-  public void set(ControlMode controlMode, double percentage){
-    lifter.set(controlMode, percentage);
+  public void servoSet(){
+    servoHolder.set(1);
   }
+
+  public void setServoPosition(){
+    servoPosition = servoHolder.get();
+  }
+
+
 
   @Override
   public void periodic() {

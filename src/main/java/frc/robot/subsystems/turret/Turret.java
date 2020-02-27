@@ -5,28 +5,28 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.subsystems;
+package frc.robot.subsystems.turret;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Robot;
 
-public class InternalBallDrive extends SubsystemBase {
-  private WPI_TalonSRX internalBallDrive = new WPI_TalonSRX(6);
+public class Turret extends SubsystemBase {
+  private WPI_TalonSRX turret = new WPI_TalonSRX(8);
   /**
-   * Creates a new InternalBallDrive.
+   * Creates a new Turret.
    */
-  public InternalBallDrive() {
-
+  public Turret() {
   }
 
-  public void set(ControlMode controlMode, double percentage){
-    internalBallDrive.set(controlMode, percentage);
+  public void setMotor(ControlMode controlMode, double percentage){
+    turret.set(controlMode, percentage);
   }
 
   @Override
   public void periodic() {
-    // This method will be called once per scheduler run
+    this.setMotor(ControlMode.PercentOutput, Robot.oi.operatorController.rightStick.getX());
   }
 }

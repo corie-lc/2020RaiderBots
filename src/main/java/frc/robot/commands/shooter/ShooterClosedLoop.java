@@ -13,20 +13,20 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Robot;
 
 public class ShooterClosedLoop extends CommandBase {
-  double Velocity = 0;
+  double velocityValue = .75;
 
   /**
    * Creates a new ShooterClosedLoop.
    */
-  public ShooterClosedLoop() {
-    addRequirements(Robot.shooter);
+  public ShooterClosedLoop(double Velocity) {
+   // addRequirements(Robot.shooter);
     // Use addRequirements() here to declare subsystem dependencies.
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    Robot.shooter.set(ControlMode.Velocity, Velocity);
+   // Robot.shooter.set(ControlMode.Velocity, velocityValue);
   }
 
   // Called every time the scheduler runs while the command is scheduled.

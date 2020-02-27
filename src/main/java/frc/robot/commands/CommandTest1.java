@@ -5,43 +5,58 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands.Turret;
+package frc.robot.commands;
 
-import com.ctre.phoenix.motorcontrol.ControlMode;
-
-import edu.wpi.first.wpilibj.GenericHID.RumbleType;
+import edu.wpi.first.wpilibj.SPI;
+import edu.wpi.first.wpilibj.SPI.Port;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Robot;
 
-public class CommandTurretAuto extends CommandBase {
-  public double percentageValue = 0;
-  public ControlMode controlModeValue = ControlMode.PercentOutput;
-  
-  public CommandTurretAuto(ControlMode controlMode, double percentage) {    
+public class CommandTest1 extends CommandBase {
+  /**
+   * Creates a new CommandTest.
+   */
+  public int a = 0;
+  public SPI spi0 = new SPI(Port.kOnboardCS0);
+  public SPI spi2 = new SPI(Port.kOnboardCS2);
+  public SPI spi3 = new SPI(Port.kOnboardCS3);
+
+  public CommandTest1(int one) {
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(Robot.turret);
     //addRequirements(Robot.pixyCam);
-    percentageValue = percentage;
-    controlModeValue = controlMode;
+    a = one;
+    System.out.println(one);
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    
   }
 
   // Called every time the scheduler runs while the command is scheduled.
-  /*
   @Override
   public void execute() {
-    if(Robot.pixyCam.getBlockX(0) > 145 && Robot.pixyCam.getBlockX(0) < 155){
-      Robot.turret.setMotor(controlModeValue, 0);
-      Robot.oi.operatorController.setRumble(RumbleType.kLeftRumble, 1);
-    } else{
-      Robot.turret.setMotor(controlModeValue, percentageValue);
+    SmartDashboard.putNumber("aaa", a);
+    if(a == 1){
+      spi0.setChipSelectActiveHigh(); 
+      spi2.setChipSelectActiveLow(); 
+      spi3.setChipSelectActiveLow();
+    } else if(a == 2){
+      spi0.setChipSelectActiveLow(); 
+      spi2.setChipSelectActiveHigh(); 
+      spi3.setChipSelectActiveLow();
+    } else if(a == 3){
+      spi0.setChipSelectActiveLow(); 
+      spi2.setChipSelectActiveLow(); 
+      spi3.setChipSelectActiveHigh();
+    } else if(a == 0){
+      spi0.setChipSelectActiveLow(); 
+      spi2.setChipSelectActiveLow(); 
+      spi3.setChipSelectActiveLow();
     }
   }
-  */
 
   // Called once the command ends or is interrupted.
   @Override

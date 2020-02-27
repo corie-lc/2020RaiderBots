@@ -8,12 +8,9 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
-import com.ctre.phoenix.motorcontrol.LimitSwitchNormal;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
-import com.revrobotics.CANDigitalInput.LimitSwitch;
 
-import edu.wpi.first.wpilibj.SPI;
-import edu.wpi.first.wpilibj.SPI.Port;
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class ControlPanelSpinner extends SubsystemBase {
@@ -26,7 +23,37 @@ public class ControlPanelSpinner extends SubsystemBase {
 
   }
 
+  public String getColor(){
+    String gameData;
+    gameData = DriverStation.getInstance().getGameSpecificMessage();
+    if(gameData.length() > 0)
+    {
+      switch (gameData.charAt(0))
+      {
+        case 'B' :
+          return "B";
+        case 'G' :
+          //Green case code
+          return "G";
+        case 'R' :
+          //Red case code
+          return "R";
+        case 'Y' :
+          //Yellow case code
+          return "Y";
+          
+        default :
+          //This is corrupt data
+          
+      }
+    } else {
+      return "N";
+    }
+    return gameData;
+  }
+
   public void set(ControlMode controlMode, double percentage){
+    System.out.println(getColor());
     controlPanelSpinner.set(controlMode, percentage);
   }
 

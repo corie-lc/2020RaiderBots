@@ -5,9 +5,10 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.subsystems;
+package frc.robot.subsystems.vision;
 
 import java.util.ArrayList;
+
 
 import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.SPI.Port;
@@ -18,15 +19,28 @@ import io.github.pseudoresonance.pixy2api.Pixy2.LinkType;
 import io.github.pseudoresonance.pixy2api.Pixy2CCC.Block;
 
 public class PixyCam extends SubsystemBase {
-  public static SPI spi = new SPI(Port.kOnboardCS0);
   public Pixy2 pixycam = Pixy2.createInstance(LinkType.SPI);
-  boolean isCamera = false;
+  public Pixy2 pixycam2 = Pixy2.createInstance(LinkType.SPI);
+  public boolean isCamera = false;
+  public SPI spi0 = new SPI(Port.kOnboardCS0);
+  public SPI spi1 = new SPI(Port.kOnboardCS1);
+  public SPI spi2 = new SPI(Port.kOnboardCS2);
+  public SPI spi3 = new SPI(Port.kOnboardCS3);
   //private SPILink spi;
   int state=-1;
   // bob drive helped, handleDeadband; - dead band control
   
   public PixyCam() {
-
+    //spi0.setChipSelectActiveHigh(); 
+    //spi1.setChipSelectActiveLow(); 
+    //spi2.setChipSelectActiveHigh(); 
+    //spi3.setChipSelectActiveLow(); 
+    spi0.setChipSelectActiveLow(); 
+    spi2.setChipSelectActiveLow(); 
+    spi3.setChipSelectActiveLow();
+    if(!isCamera)
+      state = pixycam.init(1); // if no camera present, try to initialize
+    isCamera = state>=0;
   }
 
   public double getBlockX(int index){
@@ -41,9 +55,7 @@ public class PixyCam extends SubsystemBase {
 
   @Override
   public void periodic() {
-    if(!isCamera)
-      state = pixycam.init(1); // if no camera present, try to initialize
-    isCamera = state>=0;
+    
     
     SmartDashboard.putBoolean("Camera", isCamera);   //publish if we are connected
     pixycam.getCCC().getBlocks(false,255,255); //run getBlocks with arguments to have the camera

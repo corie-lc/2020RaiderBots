@@ -5,20 +5,24 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.subsystems;
+package frc.robot.subsystems.ballcollection;
 
-import edu.wpi.first.wpilibj.Servo;
+import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
-public class ServoHolder extends SubsystemBase {
-  Servo servoHolder;
+public class Intake extends SubsystemBase {
+  private WPI_TalonSRX intakeRoller = new WPI_TalonSRX(5);
+  /**
+   * Creates a new Intake.
+   */
+  public Intake() {
 
-  public ServoHolder() {
-    servoHolder = new Servo(1);
   }
 
-  public void servoSet(double angle){
-    servoHolder.set(angle);
+  public void set(ControlMode controlMode, double percentage) {
+    intakeRoller.set(controlMode, percentage);
   }
 
   @Override
