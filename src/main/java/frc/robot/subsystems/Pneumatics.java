@@ -15,17 +15,29 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 public class Pneumatics extends SubsystemBase {
   private Compressor compressor;
   private DoubleSolenoid solenoidOne;
+  private DoubleSolenoid solenoidTwo;
 
   public Pneumatics() {
     compressor = new Compressor(13);
-    solenoidOne = new DoubleSolenoid(1, 2, 3);
+    // 0 2 raise
+    //1 3 lower
+    solenoidOne = new DoubleSolenoid(13, 0, 2);
+    solenoidTwo = new DoubleSolenoid(13, 1, 3);
   }
 
-  public void extendSolenoid(boolean extend){
-    if(this.solenoidOne.get() == Value.kReverse){
+  public void extendOne(boolean extend){
+    if (extend) {
       this.solenoidOne.set(Value.kForward);
-    } else{
+    } else {
       this.solenoidOne.set(Value.kReverse);
+    }
+  }
+
+  public void extendTwo(boolean extend){
+    if (extend) {
+      this.solenoidTwo.set(Value.kForward);
+    } else {
+      this.solenoidTwo.set(Value.kReverse);
     }
   }
 

@@ -5,25 +5,20 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands.intake;
+package frc.robot.commands.pneumatics;
 
-import com.ctre.phoenix.motorcontrol.ControlMode;
-
-import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Robot;
 
-public class CommandIntake extends CommandBase {
+public class SolenoidTwo extends CommandBase {
+  private boolean extend = true;
   /**
-   * Creates a new CommandIntake.
+   * Creates a new SolenoidTwo.
    */
-  public double percentageValue = 0;
-  public ControlMode controlModeValue = ControlMode.PercentOutput;
-
-  public CommandIntake(ControlMode controlMode, double percentage) {
-    addRequirements(Robot.intake);
-    percentageValue = percentage;
-    controlModeValue = controlMode;
+  public SolenoidTwo(boolean isExtended) {
+    addRequirements(Robot.pneumatics);
+    this.extend = isExtended;
+    // Use addRequirements() here to declare subsystem dependencies.
   }
 
   // Called when the command is initially scheduled.
@@ -34,8 +29,7 @@ public class CommandIntake extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-  
-    Robot.intake.set(controlModeValue, percentageValue);
+    Robot.pneumatics.extendTwo(extend);
   }
 
   // Called once the command ends or is interrupted.

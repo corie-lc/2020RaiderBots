@@ -12,7 +12,9 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.subsystems.ControlPanelSpinner;
 import frc.robot.subsystems.Drivetrain;
-import frc.robot.subsystems.vision.*;
+import frc.robot.subsystems.Pneumatics;
+import frc.robot.subsystems.Sensor;
+import frc.robot.subsystems.vision.VisionMode;
 import frc.robot.subsystems.lifter.*;
 import frc.robot.subsystems.turret.Turret;
 import frc.robot.subsystems.ballcollection.*;
@@ -24,9 +26,11 @@ public class Robot extends TimedRobot {
   public static ControlPanelSpinner controlPanelSpinner = new ControlPanelSpinner();
   public static Turret turret = new Turret();
   public static Lifter lifter = new Lifter();
-  public static PixyCam pixyCam = new PixyCam();
+  //public static PixyCam pixyCam = new PixyCam();
+  public static Pneumatics pneumatics = new Pneumatics();
   public static ServoHolder servoHolder = new ServoHolder();
-  //public static Pneumatics pneumatics = new Pneumatics();
+  public static VisionMode visionMode = new VisionMode();
+  public static Sensor sensor = new Sensor()
   public static OI oi;
   public static Drivetrain driveTrain;
   private Command m_autonomousCommand;

@@ -5,24 +5,23 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.subsystems.lifter;
+package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.DigitalInput;
-import edu.wpi.first.wpilibj.DigitalOutput;
-import edu.wpi.first.wpilibj.Servo;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
-public class ServoHolder extends SubsystemBase {
-   Servo servoHolder = new Servo(0);
+public class Sensor extends SubsystemBase {
+  private DigitalInput digitalInput;
+  /**
+   * Creates a new Sensor.
+   */
+  public Sensor() {
 
-  public ServoHolder() {
   }
 
-  public void servoSet(){
-    //DigitalInput a = new DigitalInput(9);
-    //System.out.println(a.get());
-    //a.close();
-    servoHolder.set(1.0);
+  public Boolean getSensorValue(int sensor){
+    digitalInput = new DigitalInput(sensor);
+    return this.digitalInput.get();
   }
 
   @Override

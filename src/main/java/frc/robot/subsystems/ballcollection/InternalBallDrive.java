@@ -10,10 +10,14 @@ package frc.robot.subsystems.ballcollection;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Robot;
 
 public class InternalBallDrive extends SubsystemBase {
   private WPI_TalonSRX internalBallDrive = new WPI_TalonSRX(6);
+  //private DigitalInput sensorFive = new DigitalInput(9);
+
   /**
    * Creates a new InternalBallDrive.
    */
@@ -22,7 +26,19 @@ public class InternalBallDrive extends SubsystemBase {
   }
 
   public void set(ControlMode controlMode, double percentage){
-    internalBallDrive.set(controlMode, percentage);
+    /*
+    if(sensorFive.get() == false){
+      internalBallDrive.set(controlMode, percentage);
+    } else{
+      internalBallDrive.set(controlMode, 0);
+    }
+    */
+    if(Robot.sensor.getSensorValue(9) == false){
+      internalBallDrive.set(controlMode, percentage);
+    } else{
+      internalBallDrive.set(controlMode, 0);
+    }
+    
   }
 
   @Override
