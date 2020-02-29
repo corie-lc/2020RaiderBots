@@ -38,6 +38,15 @@ public class PixyCam extends SubsystemBase {
     return blocks.get(index).getY();
   }
 
+  public boolean isBlock(int index){
+    ArrayList<Block> blocks = pixycam.getCCC().getBlocks(); //assign the data to an ArrayList for convinience
+    if(blocks.get(index).getWidth() > 0){
+      return true;
+    } else{
+      return false;
+    }
+  }
+
   @Override
   public void periodic() {
   

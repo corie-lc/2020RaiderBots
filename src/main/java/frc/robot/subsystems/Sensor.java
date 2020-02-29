@@ -11,17 +11,11 @@ import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Sensor extends SubsystemBase {
-  private DigitalInput digitalInput;
   /**
    * Creates a new Sensor.
    */
   public Sensor() {
 
-  }
-
-  public Boolean getSensorValue(int sensor){
-    digitalInput = new DigitalInput(sensor);
-    return this.digitalInput.get();
   }
 
   @Override

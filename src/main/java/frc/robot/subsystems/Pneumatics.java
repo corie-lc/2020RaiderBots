@@ -9,35 +9,38 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Pneumatics extends SubsystemBase {
   private Compressor compressor;
-  private DoubleSolenoid solenoidOne;
-  private DoubleSolenoid solenoidTwo;
+  private Solenoid solenoidOne;
+  private Solenoid solenoidTwo;
+  private Solenoid solenoidThree;
+  private Solenoid solenoidFour;
 
   public Pneumatics() {
     compressor = new Compressor(13);
     // 0 2 raise
     //1 3 lower
-    solenoidOne = new DoubleSolenoid(13, 0, 2);
-    solenoidTwo = new DoubleSolenoid(13, 1, 3);
+    solenoidOne = new Solenoid(13, 0);
+    solenoidTwo = new Solenoid(13, 2);
+    solenoidThree = new Solenoid(13, 1);
+    solenoidFour = new Solenoid(13, 3);
   }
 
   public void extendOne(boolean extend){
     if (extend) {
-      this.solenoidOne.set(Value.kForward);
+      this.solenoidOne.set(true);
+      this.solenoidTwo.set(true);
+      this.solenoidThree.set(false);
+      this.solenoidFour.set(false);
     } else {
-      this.solenoidOne.set(Value.kReverse);
-    }
-  }
-
-  public void extendTwo(boolean extend){
-    if (extend) {
-      this.solenoidTwo.set(Value.kForward);
-    } else {
-      this.solenoidTwo.set(Value.kReverse);
+      this.solenoidOne.set(false);
+      this.solenoidTwo.set(false);
+      this.solenoidThree.set(true);
+      this.solenoidFour.set(true);
     }
   }
 

@@ -7,6 +7,7 @@
 
 package frc.robot.subsystems.vision;
 
+import edu.wpi.first.wpilibj.DigitalOutput;
 import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.SPI.Port;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -19,6 +20,8 @@ public class VisionMode extends SubsystemBase {
   public SPI spi0 = new SPI(Port.kOnboardCS0);
   public SPI spi2 = new SPI(Port.kOnboardCS2);
   public SPI spi3 = new SPI(Port.kOnboardCS3);
+  public int visionMode = 0;
+  private DigitalOutput light = new DigitalOutput(4);
   /**
    * Creates a new VisionMode.
    */
@@ -29,23 +32,33 @@ public class VisionMode extends SubsystemBase {
   public void setCameraMode(int mode){
     SmartDashboard.putNumber("Vision Mode", mode);
     System.out.println(mode);
+    visionMode = mode;
     if(mode == 0){
+      light.set(true);
+      light.close();
       spi0.setChipSelectActiveHigh(); 
       spi2.setChipSelectActiveHigh(); 
       spi3.setChipSelectActiveHigh();
     } else if(mode == 1){
+      light.set(false);
+      light.close();
       spi0.setChipSelectActiveHigh(); 
       spi2.setChipSelectActiveLow(); 
       spi3.setChipSelectActiveLow();
     } else if(mode == 2){
+      light.set(false);
+      light.close();
       spi0.setChipSelectActiveLow(); 
       spi2.setChipSelectActiveHigh(); 
       spi3.setChipSelectActiveLow();
     } else if(mode == 3){
+      light.set(false);
+      light.close();
       spi0.setChipSelectActiveLow(); 
       spi2.setChipSelectActiveLow(); 
       spi3.setChipSelectActiveHigh();
     }
+    light.close();
   }
 
   @Override

@@ -16,7 +16,7 @@ import frc.robot.Robot;
 
 public class InternalBallDrive extends SubsystemBase {
   private WPI_TalonSRX internalBallDrive = new WPI_TalonSRX(6);
-  //private DigitalInput sensorFive = new DigitalInput(9);
+  public DigitalInput sensorFive = new DigitalInput(9);
 
   /**
    * Creates a new InternalBallDrive.
@@ -26,6 +26,8 @@ public class InternalBallDrive extends SubsystemBase {
   }
 
   public void set(ControlMode controlMode, double percentage){
+    internalBallDrive.set(controlMode, percentage);
+
     /*
     if(sensorFive.get() == false){
       internalBallDrive.set(controlMode, percentage);
@@ -33,16 +35,13 @@ public class InternalBallDrive extends SubsystemBase {
       internalBallDrive.set(controlMode, 0);
     }
     */
-    if(Robot.sensor.getSensorValue(9) == false){
-      internalBallDrive.set(controlMode, percentage);
-    } else{
-      internalBallDrive.set(controlMode, 0);
-    }
+    
     
   }
 
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
+    
   }
 }

@@ -5,24 +5,25 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands.intake;
+package frc.robot.commands;
 
-import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Robot;
 
-public class CommandIntake extends CommandBase {
-  /**
-   * Creates a new CommandIntake.
-   */
+public class ReverseIntake extends CommandBase {
+  private WPI_TalonSRX intake = new WPI_TalonSRX(6);
+  private WPI_TalonSRX internal = new WPI_TalonSRX(5);
   public double percentageValue = 0;
-  public ControlMode controlModeValue = ControlMode.PercentOutput;
-
-  public CommandIntake(ControlMode controlMode, double percentage) {
+  /**
+   * Creates a new ReverseIntake.
+   */
+  public ReverseIntake(double percentage) {
+    // Use addRequirements() here to declare subsystem dependencies.
+    addRequirements(Robot.internalBallDrive);
     addRequirements(Robot.intake);
     percentageValue = percentage;
-    controlModeValue = controlMode;
   }
 
   // Called when the command is initially scheduled.
@@ -33,14 +34,8 @@ public class CommandIntake extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    Robot.intake.set(controlModeValue, percentageValue);
-    if(percentageValue > 0){
-      if(Robot.internalBallDrive.sensorFive.get() == false){
-        Robot.internalBallDrive.set(ControlMode.PercentOutput, .50);
-      } else{
-        Robot.internalBallDrive.set(ControlMode.PercentOutput, 0);
-      }
-    }
+    intake.set( - percentageValue);
+    internal.set( - percentageValue);
   }
 
   // Called once the command ends or is interrupted.

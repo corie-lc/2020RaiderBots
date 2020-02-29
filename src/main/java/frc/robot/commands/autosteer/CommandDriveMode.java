@@ -5,24 +5,20 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands.intake;
-
-import com.ctre.phoenix.motorcontrol.ControlMode;
+package frc.robot.commands.autosteer;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Robot;
 
-public class CommandIntake extends CommandBase {
+public class CommandDriveMode extends CommandBase {
+  private int driveMode = 0;
   /**
-   * Creates a new CommandIntake.
+   * Creates a new SteerLockOn.
    */
-  public double percentageValue = 0;
-  public ControlMode controlModeValue = ControlMode.PercentOutput;
-
-  public CommandIntake(ControlMode controlMode, double percentage) {
-    addRequirements(Robot.intake);
-    percentageValue = percentage;
-    controlModeValue = controlMode;
+  public CommandDriveMode(int mode) {
+    // Use addRequirements() here to declare subsystem dependencies.
+    addRequirements(Robot.driveTrain);
+    driveMode = mode;
   }
 
   // Called when the command is initially scheduled.
@@ -33,14 +29,7 @@ public class CommandIntake extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    Robot.intake.set(controlModeValue, percentageValue);
-    if(percentageValue > 0){
-      if(Robot.internalBallDrive.sensorFive.get() == false){
-        Robot.internalBallDrive.set(ControlMode.PercentOutput, .50);
-      } else{
-        Robot.internalBallDrive.set(ControlMode.PercentOutput, 0);
-      }
-    }
+    Robot.driveTrain.setDriveMode(driveMode);
   }
 
   // Called once the command ends or is interrupted.

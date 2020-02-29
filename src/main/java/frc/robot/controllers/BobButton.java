@@ -20,4 +20,7 @@ public class BobButton extends JoystickButton {
 		super(joystick, button.value);
 	}
 
+	public void toggleWhenPressed(Object command, Object set) {
+	}
+
 }

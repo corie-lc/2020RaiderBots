@@ -23,6 +23,7 @@ public class Drivetrain extends SubsystemBase {
   private WPI_TalonSRX rightFollow = new WPI_TalonSRX(3);
   private WPI_TalonSRX leftFollow = new WPI_TalonSRX(4);
   private DifferentialDrive driveTrain = new DifferentialDrive(leftLead, rightLead);
+  private int driveMode = 0;
 
   //public BobXboxController driverController = new BobXboxController(0);
 
@@ -40,6 +41,10 @@ public class Drivetrain extends SubsystemBase {
     rightFollow.follow(rightLead);
   }
 
+  public void setDriveMode(int mode){
+    driveMode = mode;
+  }
+
   public void drive(double left, double right) {
     this.leftLead.set(left);
     this.rightLead.set(right);
@@ -47,7 +52,20 @@ public class Drivetrain extends SubsystemBase {
 
   public void drive() {
    //this.drive(Robot.oi.operatorController.leftStick.getY(), Robot.oi.operatorController.leftStick.getX());
-   driveTrain.arcadeDrive(- Robot.oi.driverController.leftStick.getY(), Robot.oi.driverController.leftStick.getX());
+   driveTrain.arcadeDrive(- Robot.oi.driverController.rightStick.getX(), - Robot.oi.driverController.leftStick.getY());
+  }
+
+
+  public double ballCollectionRotation(){
+    if(Robot.pixyCam.getBlockX(0) == 150){
+      return 0;
+    } else{
+      return .5;
+    }
+  }
+
+  public void ballCollectionDrive(){
+    driveTrain.arcadeDrive(- Robot.oi.driverController.rightStick.getX(), ballCollectionRotation());
   }
 
   @Override
@@ -55,7 +73,10 @@ public class Drivetrain extends SubsystemBase {
     // This method will be called once per scheduler run
     //SmartDashboard.putNumber("Left - y", Robot.oi.operatorController.leftStick.getX());
     //SmartDashboard.putNumber("Left - x", Robot.oi.operatorController.leftStick.getY());
-    drive();
-    
+    if(driveMode == 0){
+      drive();
+    } else if(driveMode == 1){
+      ballCollectionDrive();
+    }
   }
 }
