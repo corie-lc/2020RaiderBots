@@ -27,8 +27,18 @@ public class OI {
         operatorController = new BobXboxController(1, 0.1, 0.1);
         
         // driver controller
+            // pneumatics
+        driverController.xButton.whenPressed(new SolenoidOne(true));
+        driverController.yButton.whenPressed(new SolenoidOne(false));
+            
+        driverController.aButton.whenPressed(new CommandDriveMode(1));
+        driverController.aButton.whenPressed(new CommandDriveMode(0));
+            
+        driverController.leftTriggerButton.whenPressed(new ReverseIntake(.50));
+        driverController.leftTriggerButton.whenReleased(new ReverseIntake(0));
+
             // shooter
-      ///  operatorController.aButton.whenPressed(new CommandTurretAuto(ControlMode.PercentOutput, .75));
+       //  operatorController.aButton.whenPressed(new CommandTurretAuto(ControlMode.PercentOutput, .75));
        // operatorController.aButton.whenReleased(new CommandTurretAuto(ControlMode.PercentOutput, .0));
 
         operatorController.rightTriggerButton.whenPressed(new ShooterClosedLoop( - .70));
@@ -40,25 +50,16 @@ public class OI {
         operatorController.leftTriggerButton.whenPressed(new CommandInternalBallDrive(ControlMode.PercentOutput, .50));
         operatorController.leftTriggerButton.whenReleased(new CommandInternalBallDrive(ControlMode.PercentOutput, 0));
 
-        driverController.leftTriggerButton.whenPressed(new ReverseIntake(.50));
-        driverController.leftTriggerButton.whenReleased(new ReverseIntake(0));
-
             // lifter // lifter is controller by operator controller, left stick, y axis
 
-            // vision mode
+            // vision mode SPI Chip Selects for Pixy
         operatorController.Dpad.Down.whenPressed(new VisionModeCommand(1));
 
         operatorController.Dpad.Up.whenPressed(new VisionModeCommand(2));
 
         operatorController.Dpad.Left.whenPressed(new VisionModeCommand(3));
+
         operatorController.Dpad.Right.whenPressed(new VisionModeCommand(0));
-
-            // pneumatics
-        driverController.xButton.whenPressed(new SolenoidOne(true));
-        driverController.yButton.whenPressed(new SolenoidOne(false));
-
-        driverController.aButton.whenPressed(new CommandDriveMode(1));
-        driverController.aButton.whenPressed(new CommandDriveMode(0));
 
         
         //operatorController.bButton.whenPressed(new CommandControlPanelSpinner(ControlMode.PercentOutput, 1));     

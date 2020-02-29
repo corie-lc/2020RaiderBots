@@ -12,7 +12,6 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.Robot;
 
 public class InternalBallDrive extends SubsystemBase {
   private WPI_TalonSRX internalBallDrive = new WPI_TalonSRX(6);

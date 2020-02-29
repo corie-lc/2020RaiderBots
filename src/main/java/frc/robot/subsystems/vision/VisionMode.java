@@ -34,24 +34,27 @@ public class VisionMode extends SubsystemBase {
     System.out.println(mode);
     visionMode = mode;
     if(mode == 0){
-      light.set(true);
+      light.set(false);
       light.close();
       spi0.setChipSelectActiveHigh(); 
       spi2.setChipSelectActiveHigh(); 
       spi3.setChipSelectActiveHigh();
     } else if(mode == 1){
-      light.set(false);
+      // shooter pixy
+      light.set(true);
       light.close();
       spi0.setChipSelectActiveHigh(); 
       spi2.setChipSelectActiveLow(); 
       spi3.setChipSelectActiveLow();
     } else if(mode == 2){
+      // ball collector pixy
       light.set(false);
       light.close();
       spi0.setChipSelectActiveLow(); 
       spi2.setChipSelectActiveHigh(); 
       spi3.setChipSelectActiveLow();
     } else if(mode == 3){
+      // control panel spinner
       light.set(false);
       light.close();
       spi0.setChipSelectActiveLow(); 

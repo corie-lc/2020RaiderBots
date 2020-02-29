@@ -8,14 +8,9 @@
 package frc.robot.subsystems.turret;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
-import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.InvertType;
-
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.models.BobTalonFX;
-import frc.robot.models.MotionParameters;
-import frc.robot.models.PhoenixGains;
 
 
 
