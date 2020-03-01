@@ -17,7 +17,7 @@ public class SolenoidOne extends CommandBase {
    */
   public SolenoidOne(boolean isExtended) {
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(Robot.pneumatics);
+    //addRequirements(Robot.pneumatics);
     this.extend = isExtended;
   }
 
@@ -29,7 +29,7 @@ public class SolenoidOne extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    Robot.pneumatics.extendOne(extend);
+    //Robot.pneumatics.extendOne(extend);
   }
 
   // Called once the command ends or is interrupted.

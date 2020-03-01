@@ -23,14 +23,14 @@ import frc.robot.subsystems.turret.Turret;
 import frc.robot.subsystems.ballcollection.*;
 
 public class Robot extends TimedRobot {
-  public static Shooter shooter = new Shooter();
+  //public static Shooter shooter = new Shooter();
   public static Intake intake = new Intake();
   public static InternalBallDrive internalBallDrive = new InternalBallDrive();
   public static ControlPanelSpinner controlPanelSpinner = new ControlPanelSpinner();
   public static Turret turret = new Turret();
   public static Lifter lifter = new Lifter();
   public static PixyCam pixyCam = new PixyCam();
-  public static Pneumatics pneumatics = new Pneumatics();
+  //public static Pneumatics pneumatics = new Pneumatics();
   public static ServoHolder servoHolder = new ServoHolder();
   public static VisionMode visionMode = new VisionMode();
   public static Sensor sensor = new Sensor();

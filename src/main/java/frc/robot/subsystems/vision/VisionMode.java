@@ -31,37 +31,32 @@ public class VisionMode extends SubsystemBase {
 
   public void setCameraMode(int mode){
     SmartDashboard.putNumber("Vision Mode", mode);
-    System.out.println(mode);
+    //System.out.println(mode);
     visionMode = mode;
     if(mode == 0){
-      light.set(false);
-      light.close();
+     // light.set(false);
       spi0.setChipSelectActiveHigh(); 
       spi2.setChipSelectActiveHigh(); 
       spi3.setChipSelectActiveHigh();
     } else if(mode == 1){
-      // shooter pixy
-      light.set(true);
-      light.close();
+      // control panel
+      //light.set(false);
       spi0.setChipSelectActiveHigh(); 
       spi2.setChipSelectActiveLow(); 
       spi3.setChipSelectActiveLow();
     } else if(mode == 2){
       // ball collector pixy
-      light.set(false);
-      light.close();
+     // light.set(false);
       spi0.setChipSelectActiveLow(); 
       spi2.setChipSelectActiveHigh(); 
       spi3.setChipSelectActiveLow();
     } else if(mode == 3){
-      // control panel spinner
-      light.set(false);
-      light.close();
+      // ball shooter
+     // light.set(true);
       spi0.setChipSelectActiveLow(); 
       spi2.setChipSelectActiveLow(); 
       spi3.setChipSelectActiveHigh();
     }
-    light.close();
   }
 
   @Override

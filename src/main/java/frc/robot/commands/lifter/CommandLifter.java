@@ -34,7 +34,7 @@ public class CommandLifter extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    Robot.lifter.set(controlModeValue, Robot.oi.operatorController.leftStick.getY());
+    //Robot.lifter.set(controlModeValue, Robot.oi.operatorController.leftStick.getY());
 
   }
 

@@ -38,25 +38,26 @@ public class CommandControlPanelSpinner extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    Robot.visionMode.setCameraMode(3);
+    /*
+    Robot.visionMode.setCameraMode(1);
     Robot.controlPanelSpinner.set(controlModeValue, percentageValue);
-    if(Robot.pixyCam.isBlock(0)){
+    if(Robot.pixyCam.isControlPanelBlock(0)){
       counterBlue++;
     } 
-    if(Robot.pixyCam.isBlock(1)){
+    if(Robot.pixyCam.isControlPanelBlock(1)){
       counterGreen++;
     }
-    if(Robot.pixyCam.isBlock(2)){
+    if(Robot.pixyCam.isControlPanelBlock(2)){
       counterRed++;
     }
-    if(Robot.pixyCam.isBlock(3)){
+    if(Robot.pixyCam.isControlPanelBlock(3)){
       counterYellow++;
     }
     SmartDashboard.putNumber("Counter Blue(0)", counterBlue);
     SmartDashboard.putNumber("Counter Green(1)", counterGreen);
     SmartDashboard.putNumber("Counter Red(2)", counterRed);
     SmartDashboard.putNumber("Counter Yellow(3)", counterYellow);
-
+    */
   }
 
   // Called once the command ends or is interrupted.

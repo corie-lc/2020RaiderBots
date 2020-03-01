@@ -27,6 +27,6 @@ public class Turret extends SubsystemBase {
 
   @Override
   public void periodic() {
-    this.setMotor(ControlMode.PercentOutput, Robot.oi.operatorController.rightStick.getX());
+    //this.setMotor(ControlMode.PercentOutput, Robot.oi.operatorController.rightStick.getX() * .2);
   }
 }

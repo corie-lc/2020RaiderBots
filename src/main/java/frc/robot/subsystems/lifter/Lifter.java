@@ -28,6 +28,6 @@ public class Lifter extends SubsystemBase {
 
   @Override
   public void periodic() {
-    this.set(ControlMode.PercentOutput, Robot.oi.operatorController.leftStick.getY());
+    //this.set(ControlMode.PercentOutput, Robot.oi.operatorController.leftStick.getY() * .2);
   }
 }

@@ -15,13 +15,15 @@ import frc.robot.Robot;
 public class CommandTurretAuto extends CommandBase {
   public double percentageValue = 0;
   public ControlMode controlModeValue = ControlMode.PercentOutput;
+  public int cameraModeValue = 0;
   
-  public CommandTurretAuto(ControlMode controlMode, double percentage) {    
+  public CommandTurretAuto(ControlMode controlMode, double percentage, int cameraMode) {  
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(Robot.turret);
     //addRequirements(Robot.pixyCam);
     percentageValue = percentage;
     controlModeValue = controlMode;
+    cameraModeValue = cameraMode;
   }
 
   // Called when the command is initially scheduled.
@@ -30,17 +32,22 @@ public class CommandTurretAuto extends CommandBase {
   }
 
   // Called every time the scheduler runs while the command is scheduled.
-  /*
+  
   @Override
   public void execute() {
+    Robot.visionMode.setCameraMode(cameraModeValue);
+    
     if(Robot.pixyCam.getBlockX(0) > 145 && Robot.pixyCam.getBlockX(0) < 155){
       Robot.turret.setMotor(controlModeValue, 0);
-      Robot.oi.operatorController.setRumble(RumbleType.kLeftRumble, 1);
     } else{
-      Robot.turret.setMotor(controlModeValue, percentageValue);
+      if(Robot.pixyCam.getBlockX(0) > 155){
+        Robot.turret.setMotor(controlModeValue, percentageValue);
+      } else if(Robot.pixyCam.getBlockX(0) < 145){
+        Robot.turret.setMotor(controlModeValue, - percentageValue);
+      }
     }
   }
-  */
+  
 
   // Called once the command ends or is interrupted.
   @Override

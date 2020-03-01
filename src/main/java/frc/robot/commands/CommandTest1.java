@@ -25,7 +25,6 @@ public class CommandTest1 extends CommandBase {
     // Use addRequirements() here to declare subsystem dependencies.
     //addRequirements(Robot.pixyCam);
     a = one;
-    System.out.println(one);
   }
 
   // Called when the command is initially scheduled.

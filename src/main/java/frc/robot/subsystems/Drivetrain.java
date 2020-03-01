@@ -9,7 +9,9 @@ package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
+import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Robot;
 
@@ -23,17 +25,13 @@ public class Drivetrain extends SubsystemBase {
   private WPI_TalonSRX rightFollow = new WPI_TalonSRX(3);
   private WPI_TalonSRX leftFollow = new WPI_TalonSRX(4);
   private DifferentialDrive driveTrain = new DifferentialDrive(leftLead, rightLead);
-  private int driveMode = 0;
+  public int driveMode = 0;
+  public int rumbleCount = 0;
 
   //public BobXboxController driverController = new BobXboxController(0);
 
   public Drivetrain() {
-
     setupFollowers();
-
-    leftLead.setInverted(true);
-    rightLead.setInverted(false);
-
   }
 
   private void setupFollowers() {
@@ -45,37 +43,36 @@ public class Drivetrain extends SubsystemBase {
     driveMode = mode;
   }
 
-  public void drive(double left, double right) {
-    this.leftLead.set(left);
-    this.rightLead.set(right);
-  }
-
   public void drive() {
-   //this.drive(Robot.oi.operatorController.leftStick.getY(), Robot.oi.operatorController.leftStick.getX());
-   driveTrain.arcadeDrive(- Robot.oi.driverController.rightStick.getX(), - Robot.oi.driverController.leftStick.getY());
+    driveTrain.arcadeDrive(Robot.oi.driverController.leftStick.getY(), - Robot.oi.driverController.rightStick.getX());
   }
 
 
   public double ballCollectionRotation(){
-    if(Robot.pixyCam.getBlockX(0) == 150){
-      return 0;
+    if(Robot.pixyCam.isBallBlock(0)){
+      if(Robot.pixyCam.getBlockX(0) > 145 && Robot.pixyCam.getBlockX(0) < 155){
+        return 0;
+      } else if(Robot.pixyCam.getBlockX(0) < 145){
+        return - Robot.oi.driverController.getX();
+      }  else if(Robot.pixyCam.getBlockX(0) > 155){
+        return Robot.oi.driverController.getX();
+      }
     } else{
-      return .5;
+      return 1;
     }
+  return 0;
   }
 
   public void ballCollectionDrive(){
-    driveTrain.arcadeDrive(- Robot.oi.driverController.rightStick.getX(), ballCollectionRotation());
+    driveTrain.arcadeDrive(Robot.oi.driverController.leftStick.getY(), ballCollectionRotation());
   }
 
   @Override
   public void periodic() {
-    // This method will be called once per scheduler run
-    //SmartDashboard.putNumber("Left - y", Robot.oi.operatorController.leftStick.getX());
-    //SmartDashboard.putNumber("Left - x", Robot.oi.operatorController.leftStick.getY());
     if(driveMode == 0){
       drive();
     } else if(driveMode == 1){
+      Robot.visionMode.setCameraMode(2);
       ballCollectionDrive();
     }
   }

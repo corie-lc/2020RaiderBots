@@ -32,7 +32,7 @@ public class CommandTurret extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    Robot.turret.setMotor(controlModeValue, Robot.oi.operatorController.leftStick.getX());
+    //Robot.turret.setMotor(controlModeValue, Robot.oi.operatorController.leftStick.getX());
   }
 
   // Called once the command ends or is interrupted.

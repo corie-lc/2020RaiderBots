@@ -21,6 +21,7 @@ public class CommandIntake extends CommandBase {
 
   public CommandIntake(ControlMode controlMode, double percentage) {
     addRequirements(Robot.intake);
+    addRequirements(Robot.internalBallDrive);
     percentageValue = percentage;
     controlModeValue = controlMode;
   }

@@ -11,7 +11,7 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Robot;
 
 public class CommandDriveMode extends CommandBase {
-  private int driveMode = 0;
+  public int driveMode;
   /**
    * Creates a new SteerLockOn.
    */
@@ -29,7 +29,8 @@ public class CommandDriveMode extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    Robot.driveTrain.setDriveMode(driveMode);
+    Robot.driveTrain.rumbleCount = 0;
+    Robot.driveTrain.driveMode = driveMode;
   }
 
   // Called once the command ends or is interrupted.

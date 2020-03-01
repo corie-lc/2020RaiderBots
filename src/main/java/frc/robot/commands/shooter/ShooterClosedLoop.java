@@ -19,7 +19,7 @@ public class ShooterClosedLoop extends CommandBase {
    * Creates a new ShooterClosedLoop.
    */
   public ShooterClosedLoop(double Velocity) {
-    addRequirements(Robot.shooter);
+    //addRequirements(Robot.shooter);
     velocityValue = Velocity;
     // Use addRequirements() here to declare subsystem dependencies.
   }
@@ -27,7 +27,7 @@ public class ShooterClosedLoop extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    Robot.shooter.set(ControlMode.PercentOutput, velocityValue);
+    //Robot.shooter.set(ControlMode.PercentOutput, velocityValue);
   }
 
   // Called every time the scheduler runs while the command is scheduled.

@@ -13,34 +13,57 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import io.github.pseudoresonance.pixy2api.Pixy2;
 import io.github.pseudoresonance.pixy2api.Pixy2.LinkType;
+import io.github.pseudoresonance.pixy2api.Pixy2CCC;
 import io.github.pseudoresonance.pixy2api.Pixy2CCC.Block;
 
 public class PixyCam extends SubsystemBase {
   public Pixy2 pixycam = Pixy2.createInstance(LinkType.SPI);
   public boolean isCamera = false;
-  //private SPILink spi;
-  int state=-1;
+  // private SPILink spi;
+  int state = -1;
   // bob drive helped, handleDeadband; - dead band control
-  
+
   public PixyCam() {
-    if(!isCamera)
+    if (!isCamera)
       state = pixycam.init(1); // if no camera present, try to initialize
-    isCamera = state>=0;
+    isCamera = state >= 0;
   }
 
-  public double getBlockX(int index){
-    ArrayList<Block> blocks = pixycam.getCCC().getBlocks(); //assign the data to an ArrayList for convinience
+  public double getBlockX(int index) {
+    ArrayList<Block> blocks = pixycam.getCCC().getBlocks(); // assign the data to an ArrayList for convinience
     return blocks.get(index).getX();
   }
 
-  public double getBlockY(int index){
-    ArrayList<Block> blocks = pixycam.getCCC().getBlocks(); //assign the data to an ArrayList for convinience
+  public double getBlockY(int index) {
+    ArrayList<Block> blocks = pixycam.getCCC().getBlocks(); // assign the data to an ArrayList for convinience
     return blocks.get(index).getY();
   }
 
-  public boolean isBlock(int index){
-    ArrayList<Block> blocks = pixycam.getCCC().getBlocks(); //assign the data to an ArrayList for convinience
-    if(blocks.get(index).getWidth() > 0){
+  public boolean isBallBlock(int index) {
+    int blockCount = pixycam.getCCC().getBlocks(false, Pixy2CCC.CCC_SIG1, 1);
+    ArrayList<Block> blocks = pixycam.getCCC().getBlocks(); // assign the data to an ArrayList for convinience
+    System.out.println(blockCount);
+    if(blocks.size() > 0 && blocks.get(0).getWidth() > 5){
+      return true;
+    } else{
+      return false;
+    }
+  }
+
+  public boolean isControlPanelBlock(int index){
+    int blockCount = pixycam.getCCC().getBlocks(false, Pixy2CCC.CCC_SIG_ALL, 4);
+    switch(index){
+      case 0:
+        blockCount = pixycam.getCCC().getBlocks(false, Pixy2CCC.CCC_SIG1, 1);
+      case 1:
+        blockCount = pixycam.getCCC().getBlocks(false, Pixy2CCC.CCC_SIG2, 1);
+      case 2:
+        blockCount = pixycam.getCCC().getBlocks(false, Pixy2CCC.CCC_SIG3, 1);
+      case 3:
+        blockCount = pixycam.getCCC().getBlocks(false, Pixy2CCC.CCC_SIG4, 1);
+    }
+
+    if(blockCount > 0){
       return true;
     } else{
       return false;

@@ -17,9 +17,6 @@ public class ServoHolder extends SubsystemBase {
   }
 
   public void servoSet(){
-    //DigitalInput a = new DigitalInput(9);
-    //System.out.println(a.get());
-    //a.close();
     servoHolder.set(1.0);
   }
 
