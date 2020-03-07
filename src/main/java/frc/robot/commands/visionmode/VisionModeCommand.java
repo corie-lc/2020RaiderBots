@@ -9,6 +9,7 @@ package frc.robot.commands.visionmode;
 
 import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.SPI.Port;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Robot;
 
@@ -22,7 +23,7 @@ public class VisionModeCommand extends CommandBase {
    * Creates a new VisionMode.
    */
   public VisionModeCommand(int mode) {
-    addRequirements(Robot.visionMode);
+   // addRequirements(Robot.visionMode);
     this.mode = mode;
   }
 
@@ -34,7 +35,38 @@ public class VisionModeCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    Robot.visionMode.setCameraMode(mode);
+    setCameraMode(mode);
+  }
+
+  public void setCameraMode(int mode){
+    SmartDashboard.putNumber("Vision Mode", mode);
+    System.out.println("Vision Mode: " + mode);
+    
+    //System.out.println(mode);
+    if(mode == 0){
+     // light.set(false);
+      spi0.setChipSelectActiveHigh(); 
+      spi2.setChipSelectActiveHigh(); 
+      spi3.setChipSelectActiveHigh();
+    } else if(mode == 1){
+      // control panel
+      //light.set(false);
+      spi0.setChipSelectActiveHigh(); 
+      spi2.setChipSelectActiveLow(); 
+      spi3.setChipSelectActiveLow();
+    } else if(mode == 2){
+      // ball collector pixy
+     // light.set(false);
+      spi0.setChipSelectActiveLow(); 
+      spi2.setChipSelectActiveHigh(); 
+      spi3.setChipSelectActiveLow();
+    } else if(mode == 3){
+      // ball shooter
+     // light.set(true);
+      spi0.setChipSelectActiveLow(); 
+      spi2.setChipSelectActiveLow(); 
+      spi3.setChipSelectActiveHigh();
+    }
   }
 
   // Called once the command ends or is interrupted.

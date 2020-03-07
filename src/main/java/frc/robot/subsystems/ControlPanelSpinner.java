@@ -13,9 +13,15 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Robot;
+import io.github.pseudoresonance.pixy2api.Pixy2CCC;
 
 public class ControlPanelSpinner extends SubsystemBase {
   private WPI_TalonSRX controlPanelSpinner = new WPI_TalonSRX(7);
+  private boolean blueActive = false;
+  private int counterBlueTrue = 0;
+  private int counterBlueFalse = 0;
+  private int counterTotal = 0;
 
   /**
    * Creates a new ControlPanelSpinner.
@@ -53,14 +59,17 @@ public class ControlPanelSpinner extends SubsystemBase {
     return gameData;
   }
 
-  public void set(ControlMode controlMode, double percentage){
-  SmartDashboard.putString
-  ("Color Code", getColor());
-    controlPanelSpinner.set(controlMode, percentage);
+  public void autoControlPanel() {
+    //Robot.visionMode.setCameraMode(1); 
   }
+
+  public void set(ControlMode controlMode, double percentage){
+    controlPanelSpinner.set(controlMode, percentage);
+}
 
   @Override
   public void periodic() {
+    SmartDashboard.putString("Color Code", getColor());
     // This method will be called once per scheduler run
   }
 }

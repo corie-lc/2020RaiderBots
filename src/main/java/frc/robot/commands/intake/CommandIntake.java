@@ -9,6 +9,7 @@ package frc.robot.commands.intake;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Robot;
 
@@ -34,13 +35,12 @@ public class CommandIntake extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+    SmartDashboard.putBoolean("Sensor One:", Robot.internalBallDrive.sensorFive.get());
     Robot.intake.set(controlModeValue, percentageValue);
-    if(percentageValue > 0){
-      if(Robot.internalBallDrive.sensorFive.get() == false){
-        Robot.internalBallDrive.set(ControlMode.PercentOutput, .50);
-      } else{
-        Robot.internalBallDrive.set(ControlMode.PercentOutput, 0);
-      }
+    if(Robot.internalBallDrive.sensorFive.get() == false){
+      Robot.internalBallDrive.set(ControlMode.PercentOutput, percentageValue);
+    } else{
+      Robot.internalBallDrive.set(ControlMode.PercentOutput, 0);
     }
   }
 

@@ -15,6 +15,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class InternalBallDrive extends SubsystemBase {
   private WPI_TalonSRX internalBallDrive = new WPI_TalonSRX(6);
+  private WPI_TalonSRX internalBallIntake = new WPI_TalonSRX(14);
   public DigitalInput sensorFive = new DigitalInput(9);
 
   /**
@@ -26,6 +27,7 @@ public class InternalBallDrive extends SubsystemBase {
 
   public void set(ControlMode controlMode, double percentage){
     internalBallDrive.set(controlMode, percentage);
+    internalBallIntake.set(controlMode, percentage);
 
     /*
     if(sensorFive.get() == false){

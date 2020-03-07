@@ -13,17 +13,11 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Robot;
 
 public class CommandTurretAuto extends CommandBase {
-  public double percentageValue = 0;
-  public ControlMode controlModeValue = ControlMode.PercentOutput;
-  public int cameraModeValue = 0;
+  private int mode;
   
-  public CommandTurretAuto(ControlMode controlMode, double percentage, int cameraMode) {  
-    // Use addRequirements() here to declare subsystem dependencies.
+  public CommandTurretAuto(int mode) {  
     addRequirements(Robot.turret);
-    //addRequirements(Robot.pixyCam);
-    percentageValue = percentage;
-    controlModeValue = controlMode;
-    cameraModeValue = cameraMode;
+    this.mode = mode;
   }
 
   // Called when the command is initially scheduled.
@@ -35,17 +29,7 @@ public class CommandTurretAuto extends CommandBase {
   
   @Override
   public void execute() {
-    Robot.visionMode.setCameraMode(cameraModeValue);
-    
-    if(Robot.pixyCam.getBlockX(0) > 145 && Robot.pixyCam.getBlockX(0) < 155){
-      Robot.turret.setMotor(controlModeValue, 0);
-    } else{
-      if(Robot.pixyCam.getBlockX(0) > 155){
-        Robot.turret.setMotor(controlModeValue, percentageValue);
-      } else if(Robot.pixyCam.getBlockX(0) < 145){
-        Robot.turret.setMotor(controlModeValue, - percentageValue);
-      }
-    }
+    Robot.turret.setTurretMode(this.mode);
   }
   
 

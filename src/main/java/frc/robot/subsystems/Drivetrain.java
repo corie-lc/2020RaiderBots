@@ -11,22 +11,19 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Robot;
 
 public class Drivetrain extends SubsystemBase {
 
-  public static int DRIVE_PROFILE = 0;
-  public static int ROTATION_PROFILE = 1;
-
   public WPI_TalonSRX rightLead = new WPI_TalonSRX(1);
   private WPI_TalonSRX leftLead = new WPI_TalonSRX(2);
   private WPI_TalonSRX rightFollow = new WPI_TalonSRX(3);
   private WPI_TalonSRX leftFollow = new WPI_TalonSRX(4);
   private DifferentialDrive driveTrain = new DifferentialDrive(leftLead, rightLead);
-  public int driveMode = 0;
-  public int rumbleCount = 0;
+  private int mode = 0;
 
   //public BobXboxController driverController = new BobXboxController(0);
 
@@ -40,7 +37,7 @@ public class Drivetrain extends SubsystemBase {
   }
 
   public void setDriveMode(int mode){
-    driveMode = mode;
+    this.mode = mode;
   }
 
   public void drive() {
@@ -49,13 +46,14 @@ public class Drivetrain extends SubsystemBase {
 
 
   public double ballCollectionRotation(){
+    Robot.visionMode.setCameraMode(2);
     if(Robot.pixyCam.isBallBlock(0)){
       if(Robot.pixyCam.getBlockX(0) > 145 && Robot.pixyCam.getBlockX(0) < 155){
         return 0;
       } else if(Robot.pixyCam.getBlockX(0) < 145){
-        return - Robot.oi.driverController.getX();
+        return - 1;
       }  else if(Robot.pixyCam.getBlockX(0) > 155){
-        return Robot.oi.driverController.getX();
+        return 1;
       }
     } else{
       return 1;
@@ -64,15 +62,16 @@ public class Drivetrain extends SubsystemBase {
   }
 
   public void ballCollectionDrive(){
+    System.out.println("ball rotation mode" + ballCollectionRotation());
     driveTrain.arcadeDrive(Robot.oi.driverController.leftStick.getY(), ballCollectionRotation());
   }
 
   @Override
   public void periodic() {
-    if(driveMode == 0){
+    SmartDashboard.putNumber("Drive Mode", mode);
+    if(mode == 0){
       drive();
-    } else if(driveMode == 1){
-      Robot.visionMode.setCameraMode(2);
+    } else if(mode == 1){
       ballCollectionDrive();
     }
   }

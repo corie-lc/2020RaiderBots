@@ -9,6 +9,9 @@ package frc.robot.subsystems.vision;
 
 import java.util.ArrayList;
 
+import javax.swing.JFrame;
+
+import java.awt.*;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import io.github.pseudoresonance.pixy2api.Pixy2;
@@ -21,7 +24,6 @@ public class PixyCam extends SubsystemBase {
   public boolean isCamera = false;
   // private SPILink spi;
   int state = -1;
-  // bob drive helped, handleDeadband; - dead band control
 
   public PixyCam() {
     if (!isCamera)
@@ -40,32 +42,19 @@ public class PixyCam extends SubsystemBase {
   }
 
   public boolean isBallBlock(int index) {
-    int blockCount = pixycam.getCCC().getBlocks(false, Pixy2CCC.CCC_SIG1, 1);
     ArrayList<Block> blocks = pixycam.getCCC().getBlocks(); // assign the data to an ArrayList for convinience
-    System.out.println(blockCount);
-    if(blocks.size() > 0 && blocks.get(0).getWidth() > 5){
+    if (blocks.size() > 0) {
       return true;
-    } else{
+    } else {
       return false;
     }
   }
 
-  public boolean isControlPanelBlock(int index){
-    int blockCount = pixycam.getCCC().getBlocks(false, Pixy2CCC.CCC_SIG_ALL, 4);
-    switch(index){
-      case 0:
-        blockCount = pixycam.getCCC().getBlocks(false, Pixy2CCC.CCC_SIG1, 1);
-      case 1:
-        blockCount = pixycam.getCCC().getBlocks(false, Pixy2CCC.CCC_SIG2, 1);
-      case 2:
-        blockCount = pixycam.getCCC().getBlocks(false, Pixy2CCC.CCC_SIG3, 1);
-      case 3:
-        blockCount = pixycam.getCCC().getBlocks(false, Pixy2CCC.CCC_SIG4, 1);
-    }
-
-    if(blockCount > 0){
+  public boolean isControlPanelBlock(int index) {
+    int blockCount = pixycam.getCCC().getBlocks(false, Pixy2CCC.CCC_SIG3, 1);
+    if (blockCount == 1) {
       return true;
-    } else{
+    } else {
       return false;
     }
   }
@@ -92,4 +81,6 @@ public class PixyCam extends SubsystemBase {
       SmartDashboard.putBoolean("present", false);
       SmartDashboard.putNumber("blocks detected", blocks.size()); //push to dashboard how many targets are detected
   }
+
+
 }

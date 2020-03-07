@@ -28,9 +28,8 @@ public class OI {
         operatorController = new BobXboxController(1, 0.1, 0.1);
         
         // driver controller
-            // pneumatics
-        driverController.xButton.whenPressed(new SolenoidOne(true));
-        driverController.yButton.whenPressed(new SolenoidOne(false));
+        //driverController.xButton.whenPressed(new SolenoidOne(true));
+        //driverController.yButton.whenPressed(new SolenoidOne(false));
             
         driverController.aButton.whenPressed(new CommandDriveMode(1));
         driverController.aButton.whenReleased(new CommandDriveMode(0));
@@ -38,30 +37,24 @@ public class OI {
         driverController.leftTriggerButton.whenPressed(new ReverseIntake(.50));
         driverController.leftTriggerButton.whenReleased(new ReverseIntake(0));
 
-            // shooter
-
-       // operatorController.rightTriggerButton.whenPressed(new ShooterClosedLoop( - .20));
-      //  operatorController.rightTriggerButton.whenReleased(new ShooterClosedLoop(0.0));
-
         operatorController.leftTriggerButton.whenPressed(new CommandInternalBallDrive(ControlMode.PercentOutput, 1));
         operatorController.leftTriggerButton.whenReleased(new CommandInternalBallDrive(ControlMode.PercentOutput, 0));
 
-        operatorController.aButton.whenPressed(new CommandIntake(ControlMode.PercentOutput, .50));
+        operatorController.aButton.whenPressed(new CommandIntake(ControlMode.PercentOutput, 1));
         operatorController.aButton.whenReleased(new CommandIntake(ControlMode.PercentOutput, 0));
 
-        operatorController.bButton.whenPressed(new CommandControlPanelSpinner(ControlMode.PercentOutput, .25));
-        operatorController.bButton.whenReleased(new CommandControlPanelSpinner(ControlMode.PercentOutput, 0));
+        operatorController.bButton.whenPressed(new CommandControlPanelSpinner(ControlMode.PercentOutput, 0.20, 1));
+        operatorController.bButton.whenReleased(new CommandControlPanelSpinner(ControlMode.PercentOutput, 0.0, 0));
 
-        operatorController.xButton.whenPressed(new CommandTurretAuto(ControlMode.PercentOutput, 0, 3));
-        operatorController.xButton.whenReleased(new CommandTurretAuto(ControlMode.PercentOutput, 0, 0));
+        operatorController.yButton.whenReleased(new CommandControlPanelSpinner(ControlMode.PercentOutput, 0.20, 0));
+        operatorController.yButton.whenReleased(new CommandControlPanelSpinner(ControlMode.PercentOutput, 0.0, 0));
 
-            // lifter // lifter is controller by operator controller, left stick, y axis
+        operatorController.xButton.whenPressed(new CommandTurretAuto(1));
+        operatorController.xButton.whenReleased(new CommandTurretAuto(0));
 
-            // vision mode SPI Chip Selects for Pixy
-      //  operatorController.Dpad.Down.whenPressed(new VisionModeCommand(1));
-        //operatorController.Dpad.Up.whenPressed(new VisionModeCommand(2));
-      //   operatorController.Dpad.Left.whenPressed(new VisionModeCommand(3));
-
+        operatorController.Dpad.Down.whenPressed(new VisionModeCommand(1));
+        operatorController.Dpad.Up.whenPressed(new VisionModeCommand(2));
+        operatorController.Dpad.Left.whenPressed(new VisionModeCommand(3));
         operatorController.Dpad.Right.whenPressed(new VisionModeCommand(0));
 
         

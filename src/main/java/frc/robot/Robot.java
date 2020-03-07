@@ -43,7 +43,7 @@ public class Robot extends TimedRobot {
 
   @Override
   public void robotInit() {
-     CameraServer.getInstance().startAutomaticCapture(0);
+    // CameraServer.getInstance().startAutomaticCapture(0);
     driveTrain = new Drivetrain();
     m_robotContainer = new RobotContainer();
     oi = new OI();
