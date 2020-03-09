@@ -25,8 +25,6 @@ public class Drivetrain extends SubsystemBase {
   private DifferentialDrive driveTrain = new DifferentialDrive(leftLead, rightLead);
   private int mode = 0;
 
-  //public BobXboxController driverController = new BobXboxController(0);
-
   public Drivetrain() {
     setupFollowers();
   }
@@ -38,6 +36,10 @@ public class Drivetrain extends SubsystemBase {
 
   public void setDriveMode(int mode){
     this.mode = mode;
+  }
+
+  public void autoDrive(double y, double x){
+    driveTrain.arcadeDrive(y, x);
   }
 
   public void drive() {

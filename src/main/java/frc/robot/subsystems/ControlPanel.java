@@ -8,18 +8,17 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Robot;
 
-public class ControlPanelSpinner extends SubsystemBase {
-  //private WPI_TalonSRX controlPanelSpinner = new WPI_TalonSRX(7);
+public class ControlPanel extends SubsystemBase {
+  private WPI_TalonSRX spinner = new WPI_TalonSRX(8);
   private int mode;
-  /**
-   * Creates a new ControlPanelSpinner.
-   */
-  public ControlPanelSpinner() {
 
+  public ControlPanel() {
   }
 
   public String getColor(){
@@ -50,31 +49,43 @@ public class ControlPanelSpinner extends SubsystemBase {
     }
     return gameData;
   }
-  
 
-  private double controlPanelAutoPosition(){
-    int blueCounterTrue = 0;
-    int blueCounterFalse = 0;
-    int blueCounterTotal = 0;
-    boolean isBlue = false;
+  private double controlPanelAutoPosition(String color){
+    int counterTrue = 0;
+    int counterFalse = 0;
+    int counterTotal = 0;
+    boolean isColor = false;
+    int colorMode = 0;
 
     if(getColor() == "B"){
-      if(blueCounterTotal >= 20){
-        if(blueCounterTrue > 7){
-          isBlue = true;
+      colorMode = 0;
+    } else if(getColor() == "Y"){
+      colorMode = 1;
+    } else if(getColor() == "G"){
+      colorMode = 2;
+    } else if(getColor() == "R"){
+      colorMode = 3;
+    }
+
+
+
+    if(getColor() == "B"){
+      if(counterTotal >= 20){
+        if(counterTrue > 1){ // this value may change
+          isColor = true;
         }
       }
-      if(Robot.pixyCam.isControlPanelBlock(0) >= 1){
-        blueCounterTrue++;
-        blueCounterTotal++;
+      if(Robot.pixyCam.isControlPanelBlock(colorMode) >= 1){
+        counterTrue++;
+        counterTotal++;
       } else{
-        blueCounterFalse++;
-        blueCounterTotal++;
+        counterFalse++;
+        counterTotal++;
       }
     }
 
     if(getColor() == "B"){
-      if(isBlue){
+      if(isColor){
         return 0;
       } else{
         return .50;
@@ -83,22 +94,28 @@ public class ControlPanelSpinner extends SubsystemBase {
     return 0;
   }
 
-  public void setControlPanelMode(int mode){
+  public void setControlPanelMode(int mode, double percentage){
     this.mode = mode;
-    set(ControlMode.PercentOutput, .30);
+    set();
   }
 
   public void autoControlPanel() {
     Robot.visionMode.setCameraMode(1); 
   }
-  
 
-  public void set(ControlMode controlMode, double percentage){
-    //controlPanelSpinner.set(controlMode, percentage);
-}
+  public void setMotor(double percentage){
+    spinner.set(percentage);
+  }
+  public void set(){
+    if(mode == 0){
+      spinner.set(ControlMode.PercentOutput, 0);
+    } else{
+      spinner.set(ControlMode.PercentOutput, controlPanelAutoPosition(getColor()));
+    }
+  } 
 
   @Override
   public void periodic() {
-
+    // This method will be called once per scheduler run
   }
 }

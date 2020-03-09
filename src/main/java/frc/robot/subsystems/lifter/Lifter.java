@@ -11,13 +11,10 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.Robot;
 
 public class Lifter extends SubsystemBase {
-  private WPI_TalonSRX lifter = new WPI_TalonSRX(9);
-  /**
-   * Creates a new Lifter.
-   */
+  private WPI_TalonSRX lifter = new WPI_TalonSRX(15);
+
   public Lifter() {
 
   }
@@ -28,6 +25,5 @@ public class Lifter extends SubsystemBase {
 
   @Override
   public void periodic() {
-    //this.set(ControlMode.PercentOutput, Robot.oi.operatorController.leftStick.getY() * .2);
   }
 }

@@ -9,11 +9,13 @@ package frc.robot.commands.Turret;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 
+import edu.wpi.first.wpilibj.DigitalOutput;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Robot;
 
 public class CommandTurretAuto extends CommandBase {
   private int mode;
+  private DigitalOutput light;
   
   public CommandTurretAuto(int mode) {  
     addRequirements(Robot.turret);
@@ -29,6 +31,15 @@ public class CommandTurretAuto extends CommandBase {
   
   @Override
   public void execute() {
+    if(mode == 1){
+      light = new DigitalOutput(4);
+      light.set(true);
+      light.close();
+    } else{
+      light = new DigitalOutput(4);
+      light.set(false);
+      light.close();
+    }
     Robot.turret.setTurretMode(this.mode);
   }
   

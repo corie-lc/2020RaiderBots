@@ -1,0 +1,17 @@
+operator CONTROLLER
+left trigger - reverse intake
+a button - intake
+b button control panel
+x button - turret auto
+
+DRIVER CONTROLLER
+joysticks - driving
+a - auto steer
+x, y - solenoid
+
+
+// left to do 
+ - train & test pixy systems
+ - limit switches
+
+ - test everything

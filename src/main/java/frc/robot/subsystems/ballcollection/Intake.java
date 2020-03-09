@@ -14,9 +14,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Intake extends SubsystemBase {
   private WPI_TalonSRX intakeRoller = new WPI_TalonSRX(5);
-  /**
-   * Creates a new Intake.
-   */
+
   public Intake() {
 
   }
@@ -27,6 +25,5 @@ public class Intake extends SubsystemBase {
 
   @Override
   public void periodic() {
-    // This method will be called once per scheduler run
   }
 }

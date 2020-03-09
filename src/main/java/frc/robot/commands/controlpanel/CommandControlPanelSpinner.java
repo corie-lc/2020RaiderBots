@@ -9,7 +9,6 @@ package frc.robot.commands.controlpanel;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 
-import edu.wpi.first.wpilibj.DigitalOutput;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Robot;
 
@@ -21,10 +20,8 @@ public class CommandControlPanelSpinner extends CommandBase {
   /**
    * Creates a new CommandControlPanelSpinner.
    */
-  public CommandControlPanelSpinner(ControlMode controlMode, double percentage, int mode) {
+  public CommandControlPanelSpinner(ControlMode controlMode, int mode) {
     addRequirements(Robot.controlPanelSpinner);
-    percentageValue = percentage;
-    controlModeValue = controlMode;
     this.mode = mode;
     }
 
@@ -36,7 +33,12 @@ public class CommandControlPanelSpinner extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {   
-    Robot.visionMode.setCameraMode(1);   
+    if(this.mode == 0){
+      Robot.controlPanelSpinner.setControlPanelMode(this.mode, 0);
+      Robot.controlPanelSpinner.set();
+    } else{
+      Robot.controlPanelSpinner.setControlPanelMode(this.mode, .20);
+    }
   }
 
   // Called once the command ends or is interrupted.

@@ -5,20 +5,19 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands.pneumatics;
+package frc.robot.commands.autonomous;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Robot;
 
-public class SolenoidOne extends CommandBase {
-  private boolean extend = true;
+public class DriveTime extends CommandBase {
   /**
-   * Creates a new SolenoidOne.
+   * Creates a new DriveTime.
    */
-  public SolenoidOne(boolean isExtended) {
+  public DriveTime() {
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(Robot.pneumatics);
-    this.extend = isExtended;
+    addRequirements(Robot.driveTrain);
+     
   }
 
   // Called when the command is initially scheduled.
@@ -29,7 +28,7 @@ public class SolenoidOne extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    Robot.pneumatics.extendOne(extend);
+    Robot.driveTrain.autoDrive(.30, 0);
   }
 
   // Called once the command ends or is interrupted.

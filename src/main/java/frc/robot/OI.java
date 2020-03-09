@@ -15,7 +15,9 @@ import frc.robot.commands.autosteer.CommandDriveMode;
 import frc.robot.commands.controlpanel.CommandControlPanelSpinner;
 import frc.robot.commands.intake.CommandIntake;
 import frc.robot.commands.intake.CommandInternalBallDrive;
+import frc.robot.commands.lifter.CommandLifter;
 import frc.robot.commands.pneumatics.SolenoidOne;
+import frc.robot.commands.shooter.SpinShooter;
 import frc.robot.commands.visionmode.VisionModeCommand;
 import frc.robot.controllers.BobXboxController;
 
@@ -28,26 +30,23 @@ public class OI {
         operatorController = new BobXboxController(1, 0.1, 0.1);
         
         // driver controller
-        //driverController.xButton.whenPressed(new SolenoidOne(true));
-        //driverController.yButton.whenPressed(new SolenoidOne(false));
+        driverController.xButton.whenPressed(new SolenoidOne(true));
+        driverController.yButton.whenPressed(new SolenoidOne(false));
             
         driverController.aButton.whenPressed(new CommandDriveMode(1));
         driverController.aButton.whenReleased(new CommandDriveMode(0));
             
-        driverController.leftTriggerButton.whenPressed(new ReverseIntake(.50));
-        driverController.leftTriggerButton.whenReleased(new ReverseIntake(0));
+        //driverController.leftTriggerButton.whenPressed(new ReverseIntake(.50));
+        //driverController.leftTriggerButton.whenReleased(new ReverseIntake(0));
+
+        operatorController.rightTriggerButton.whenPressed(new SpinShooter(ControlMode.PercentOutput, 1));
+        operatorController.rightTriggerButton.whenReleased(new SpinShooter(ControlMode.PercentOutput, 0));
 
         operatorController.leftTriggerButton.whenPressed(new CommandInternalBallDrive(ControlMode.PercentOutput, 1));
         operatorController.leftTriggerButton.whenReleased(new CommandInternalBallDrive(ControlMode.PercentOutput, 0));
 
         operatorController.aButton.whenPressed(new CommandIntake(ControlMode.PercentOutput, 1));
         operatorController.aButton.whenReleased(new CommandIntake(ControlMode.PercentOutput, 0));
-
-        operatorController.bButton.whenPressed(new CommandControlPanelSpinner(ControlMode.PercentOutput, 0.20, 1));
-        operatorController.bButton.whenReleased(new CommandControlPanelSpinner(ControlMode.PercentOutput, 0.0, 0));
-
-        operatorController.yButton.whenReleased(new CommandControlPanelSpinner(ControlMode.PercentOutput, 0.20, 0));
-        operatorController.yButton.whenReleased(new CommandControlPanelSpinner(ControlMode.PercentOutput, 0.0, 0));
 
         operatorController.xButton.whenPressed(new CommandTurretAuto(1));
         operatorController.xButton.whenReleased(new CommandTurretAuto(0));
@@ -58,9 +57,10 @@ public class OI {
         operatorController.Dpad.Right.whenPressed(new VisionModeCommand(0));
 
         
-        //operatorController.bButton.whenPressed(new CommandControlPanelSpinner(ControlMode.PercentOutput, 1));     
-        //operatorController.bButton.whenReleased(new CommandControlPanelSpinner(ControlMode.PercentOutput, 0));           
-
+        operatorController.bButton.whenPressed(new CommandControlPanelSpinner(ControlMode.PercentOutput, 1));     
+        operatorController.bButton.whenReleased(new CommandControlPanelSpinner(ControlMode.PercentOutput, 0));      
+        
+        operatorController.yButton.whenPressed(new CommandLifter(ControlMode.PercentOutput, .30));
+        operatorController.yButton.whenReleased(new CommandLifter(ControlMode.PercentOutput, 0));
     }
-
 }

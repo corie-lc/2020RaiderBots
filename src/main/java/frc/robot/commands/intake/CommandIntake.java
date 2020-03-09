@@ -35,9 +35,9 @@ public class CommandIntake extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    SmartDashboard.putBoolean("Sensor One:", Robot.internalBallDrive.sensorFive.get());
+    SmartDashboard.putBoolean("Sensor One:", Robot.internalBallDrive.checkSensor(1));
     Robot.intake.set(controlModeValue, percentageValue);
-    if(Robot.internalBallDrive.sensorFive.get() == false){
+    if(Robot.internalBallDrive.checkSensor(1) == false){
       Robot.internalBallDrive.set(ControlMode.PercentOutput, percentageValue);
     } else{
       Robot.internalBallDrive.set(ControlMode.PercentOutput, 0);

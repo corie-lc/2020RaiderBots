@@ -16,34 +16,27 @@ public class ReverseIntake extends CommandBase {
   private WPI_TalonSRX intake = new WPI_TalonSRX(6);
   private WPI_TalonSRX internal = new WPI_TalonSRX(5);
   public double percentageValue = 0;
-  /**
-   * Creates a new ReverseIntake.
-   */
+
   public ReverseIntake(double percentage) {
-    // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(Robot.internalBallDrive);
     addRequirements(Robot.intake);
     percentageValue = percentage;
   }
 
-  // Called when the command is initially scheduled.
   @Override
   public void initialize() {
   }
 
-  // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
     intake.set( - percentageValue);
     internal.set( - percentageValue);
   }
 
-  // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
   }
 
-  // Returns true when the command should end.
   @Override
   public boolean isFinished() {
     return false;

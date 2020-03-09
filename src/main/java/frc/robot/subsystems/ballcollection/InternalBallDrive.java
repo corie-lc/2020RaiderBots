@@ -16,33 +16,40 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 public class InternalBallDrive extends SubsystemBase {
   private WPI_TalonSRX internalBallDrive = new WPI_TalonSRX(6);
   private WPI_TalonSRX internalBallIntake = new WPI_TalonSRX(14);
-  public DigitalInput sensorFive = new DigitalInput(9);
+  private DigitalInput sensorOne = new DigitalInput(9);
+  private DigitalInput sensorTwo = new DigitalInput(8);
+  private DigitalInput sensorThree = new DigitalInput(7);
 
-  /**
-   * Creates a new InternalBallDrive.
-   */
   public InternalBallDrive() {
 
   }
 
   public void set(ControlMode controlMode, double percentage){
     internalBallDrive.set(controlMode, percentage);
-    internalBallIntake.set(controlMode, percentage);
+    internalBallIntake.set(controlMode, - percentage);
+  }
 
-    /*
-    if(sensorFive.get() == false){
-      internalBallDrive.set(controlMode, percentage);
+  public boolean checkSensor(int sensor){
+    if(sensor == 1){
+      return sensorOne.get();
+    } else if(sensor == 2){
+      return sensorTwo.get();
+    } else if(sensor == 3){
+      return sensorThree.get();
     } else{
-      internalBallDrive.set(controlMode, 0);
+      return true;
     }
-    */
-    
-    
+  }
+
+  public boolean isIntakeFull(){
+    if(!checkSensor(1) && !checkSensor(2)){
+      return true;
+    } else{
+      return false;
+    }
   }
 
   @Override
-  public void periodic() {
-    // This method will be called once per scheduler run
-    
+  public void periodic() {    
   }
 }
