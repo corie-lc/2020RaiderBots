@@ -9,6 +9,9 @@ package frc.robot.subsystems.vision;
 
 import java.util.ArrayList;
 
+import javax.swing.JFrame;
+
+import java.awt.*;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import io.github.pseudoresonance.pixy2api.Pixy2;
@@ -47,13 +50,12 @@ public class PixyCam extends SubsystemBase {
     }
   }
 
-  public int isControlPanelBlock(int index) {
+  public boolean isControlPanelBlock(int index) {
     int blockCount = pixycam.getCCC().getBlocks(false, Pixy2CCC.CCC_SIG3, 1);
-    SmartDashboard.putNumber("Control Panel Block", blockCount);
-    if(blockCount <= 0){
-      return 0;
-    } else{
-      return blockCount;
+    if (blockCount == 1) {
+      return true;
+    } else {
+      return false;
     }
   }
 

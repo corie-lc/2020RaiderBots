@@ -7,17 +7,10 @@
 
 package frc.robot;
 
-import com.ctre.phoenix.motorcontrol.ControlMode;
-
-import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
-import frc.robot.commands.autonomous.AutoCollection;
-import frc.robot.commands.autonomous.DriveTime;
-import frc.robot.commands.controlpanel.CommandControlPanelSpinner;
 import frc.robot.subsystems.ControlPanel;
-import frc.robot.subsystems.ControlPanelSpinner;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.Pneumatics;
 import frc.robot.subsystems.Sensor;
@@ -45,16 +38,10 @@ public class Robot extends TimedRobot {
   private Command m_autonomousCommand;
   private RobotContainer m_robotContainer;
   String gameData;
-
-  // autonomous
-  private Command autoDriveTime;
-  //private Command autoBallCollection;
-
+  
   @Override
   public void robotInit() {
     // CameraServer.getInstance().startAutomaticCapture(0);
-    autoDriveTime = new DriveTime();
-    //autoBallCollection = new AutoCollection();
     driveTrain = new Drivetrain();
     m_robotContainer = new RobotContainer();
     oi = new OI();
@@ -62,7 +49,6 @@ public class Robot extends TimedRobot {
 
   @Override
   public void robotPeriodic() {
-    
     CommandScheduler.getInstance().run();
   }
 
@@ -76,21 +62,11 @@ public class Robot extends TimedRobot {
 
   @Override
   public void autonomousInit() {
-    //m_autonomousCommand = m_robotContainer.getAutonomousCommand();
-    autoDriveTime.withTimeout(7);
-
-    if (m_autonomousCommand != null) {
-      m_autonomousCommand.schedule();
-    }
+    m_autonomousCommand = m_robotContainer.getAutonomousCommand();
   }
 
   @Override
-  public void autonomousPeriodic() {
-    //if(Robot.internalBallDrive.isIntakeFull()){
-    //  Robot.turret.setMotor(ControlMode.PercentOutput, Robot.turret.turretAutoAim());
-   // } else{
-   //   Robot.driveTrain.ballCollectionDrive();
-  //  }    
+  public void autonomousPeriodic() { 
   }
 
   @Override

@@ -16,8 +16,12 @@ public class ServoHolder extends SubsystemBase {
   public ServoHolder() {
   }
 
-  public void servoSet(){
-    servoHolder.set(1.0);
+  public void servoSet(int mode){
+    if(mode == 1){
+      servoHolder.set(1.0);
+    } else{
+      servoHolder.set(0.0);
+    }
   }
 
   @Override

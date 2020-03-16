@@ -12,9 +12,11 @@ import frc.robot.Robot;
 
 public class CommandServoHolder extends CommandBase {
   double angleValue = 0;
+  int mode;
 
-  public CommandServoHolder() {
+  public CommandServoHolder(int mode) {
     addRequirements(Robot.servoHolder);
+    this.mode = mode;
   }
 
   // Called when the command is initially scheduled.
@@ -25,7 +27,7 @@ public class CommandServoHolder extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    Robot.servoHolder.servoSet();
+    Robot.servoHolder.servoSet(mode);
   }
 
   // Called once the command ends or is interrupted.

@@ -28,7 +28,7 @@ public class InternalBallDrive extends SubsystemBase {
     internalBallDrive.set(controlMode, percentage);
     internalBallIntake.set(controlMode, - percentage);
   }
-
+ 
   public boolean checkSensor(int sensor){
     if(sensor == 1){
       return sensorOne.get();

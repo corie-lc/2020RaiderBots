@@ -43,12 +43,14 @@ public class Drivetrain extends SubsystemBase {
   }
 
   public void drive() {
-    driveTrain.arcadeDrive(Robot.oi.driverController.leftStick.getY(), - Robot.oi.driverController.rightStick.getX());
+    driveTrain.arcadeDrive(Robot.oi.driverController.leftStick.getY(),  Robot.oi.driverController.rightStick.getX());
   }
 
 
+  /*
   public double ballCollectionRotation(){
-    Robot.visionMode.setCameraMode(2);
+    SmartDashboard.putBoolean("Test", Robot.pixyCam.isBallBlock(0));
+    //Robot.visionMode.setCameraMode(2);
     if(Robot.pixyCam.isBallBlock(0)){
       if(Robot.pixyCam.getBlockX(0) > 145 && Robot.pixyCam.getBlockX(0) < 155){
         return 0;
@@ -62,11 +64,12 @@ public class Drivetrain extends SubsystemBase {
     }
   return 0;
   }
+  */
 
   public void ballCollectionDrive(){
-    System.out.println("ball rotation mode" + ballCollectionRotation());
-    driveTrain.arcadeDrive(Robot.oi.driverController.leftStick.getY(), ballCollectionRotation());
-  }
+   // System.out.println("ball rotation mode", 0);
+    driveTrain.arcadeDrive(Robot.oi.driverController.leftStick.getY(), 0);
+  } 
 
   @Override
   public void periodic() {

@@ -69,13 +69,14 @@ public class ControlPanel extends SubsystemBase {
 
 
 
+    /*
     if(getColor() == "B"){
       if(counterTotal >= 20){
         if(counterTrue > 1){ // this value may change
           isColor = true;
         }
       }
-      if(Robot.pixyCam.isControlPanelBlock(colorMode) >= 1){
+      if(Robot.pixyCam.isControlPanelBlock(colorMode) == true){
         counterTrue++;
         counterTotal++;
       } else{
@@ -91,7 +92,9 @@ public class ControlPanel extends SubsystemBase {
         return .50;
       }
     }
-    return 0;
+  
+  */
+  return 0;
   }
 
   public void setControlPanelMode(int mode, double percentage){
@@ -100,7 +103,7 @@ public class ControlPanel extends SubsystemBase {
   }
 
   public void autoControlPanel() {
-    Robot.visionMode.setCameraMode(1); 
+    //Robot.visionMode.setCameraMode(1); 
   }
 
   public void setMotor(double percentage){

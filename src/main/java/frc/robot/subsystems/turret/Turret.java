@@ -35,7 +35,8 @@ public class Turret extends SubsystemBase {
   }
 
   public double turretAutoAim(){
-    Robot.visionMode.setCameraMode(3);
+   // Robot.visionMode.setCameraMode(3);
+   /*
     try{
       if(Robot.pixyCam.getBlockX(0) > 145 && Robot.pixyCam.getBlockX(0) < 155){
         SmartDashboard.putString("SHOOTER", "LOCK");
@@ -53,7 +54,8 @@ public class Turret extends SubsystemBase {
       SmartDashboard.putString("SHOOTER", "NOT LOCKED");
       return .10;
     }
-  return 0;
+    */
+    return 0;
   }
 
   public void setTurretMode(int mode){
@@ -63,11 +65,12 @@ public class Turret extends SubsystemBase {
 
   @Override
   public void periodic() {
-    if(mode == 1){
-      this.setMotor(ControlMode.PercentOutput, turretAutoAim());
-    } else{
-      this.setMotor(ControlMode.PercentOutput, Robot.oi.operatorController.rightStick.getX() * .10);
-    }
+    setMotor(ControlMode.PercentOutput, Robot.oi.operatorController.leftStick.getX() * .2);
+    //this.setMotor(ControlMode.PercentOutput, Robot.oi.operatorController.rightStick.getX() * .30);
+    //if(mode == 1){
+    //  this.setMotor(ControlMode.PercentOutput, turretAutoAim());
+   // } else{
+   /// }
     /*
     if(mode == 0){
       if(turret.isFwdLimitSwitchClosed() == 1){

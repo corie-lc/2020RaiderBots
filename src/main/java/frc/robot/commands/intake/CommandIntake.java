@@ -36,11 +36,16 @@ public class CommandIntake extends CommandBase {
   @Override
   public void execute() {
     SmartDashboard.putBoolean("Sensor One:", Robot.internalBallDrive.checkSensor(1));
-    Robot.intake.set(controlModeValue, percentageValue);
-    if(Robot.internalBallDrive.checkSensor(1) == false){
-      Robot.internalBallDrive.set(ControlMode.PercentOutput, percentageValue);
+    if(Robot.internalBallDrive.checkSensor(2) == true){
+      Robot.intake.set(controlModeValue, percentageValue);
+      if(Robot.internalBallDrive.checkSensor(1) == false){
+        Robot.internalBallDrive.set(ControlMode.PercentOutput, percentageValue);
+      } else{
+        Robot.internalBallDrive.set(ControlMode.PercentOutput, 0);
+      }
     } else{
       Robot.internalBallDrive.set(ControlMode.PercentOutput, 0);
+      Robot.intake.set(ControlMode.PercentOutput, 0);
     }
   }
 

@@ -1,20 +1,21 @@
-/*----------------------------------------------------------------------------*/
-/* Copyright (c) 2019 FIRST. All Rights Reserved.                             */
-/* Open Source Software - may be modified and shared by FRC teams. The code   */
-/* must be accompanied by the FIRST BSD license file in the root directory of */
-/* the project.                                                               */
-/*----------------------------------------------------------------------------*/
-
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+
 import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Robot;
+import io.github.pseudoresonance.pixy2api.Pixy2CCC;
 
 public class ControlPanelSpinner extends SubsystemBase {
-  //private WPI_TalonSRX controlPanelSpinner = new WPI_TalonSRX(7);
-  private int mode;
+  private WPI_TalonSRX controlPanelSpinner = new WPI_TalonSRX(7);
+  private boolean blueActive = false;
+  private int counterBlueTrue = 0;
+  private int counterBlueFalse = 0;
+  private int counterTotal = 0;
+
   /**
    * Creates a new ControlPanelSpinner.
    */
@@ -50,55 +51,18 @@ public class ControlPanelSpinner extends SubsystemBase {
     }
     return gameData;
   }
-  
-
-  private double controlPanelAutoPosition(){
-    int blueCounterTrue = 0;
-    int blueCounterFalse = 0;
-    int blueCounterTotal = 0;
-    boolean isBlue = false;
-
-    if(getColor() == "B"){
-      if(blueCounterTotal >= 20){
-        if(blueCounterTrue > 7){
-          isBlue = true;
-        }
-      }
-      if(Robot.pixyCam.isControlPanelBlock(0) >= 1){
-        blueCounterTrue++;
-        blueCounterTotal++;
-      } else{
-        blueCounterFalse++;
-        blueCounterTotal++;
-      }
-    }
-
-    if(getColor() == "B"){
-      if(isBlue){
-        return 0;
-      } else{
-        return .50;
-      }
-    }
-    return 0;
-  }
-
-  public void setControlPanelMode(int mode){
-    this.mode = mode;
-    set(ControlMode.PercentOutput, .30);
-  }
 
   public void autoControlPanel() {
-    Robot.visionMode.setCameraMode(1); 
+    //Robot.visionMode.setCameraMode(1); 
   }
-  
 
   public void set(ControlMode controlMode, double percentage){
-    //controlPanelSpinner.set(controlMode, percentage);
+    controlPanelSpinner.set(controlMode, percentage);
 }
 
   @Override
   public void periodic() {
-
+    SmartDashboard.putString("Color Code", getColor());
+    // This method will be called once per scheduler run
   }
 }

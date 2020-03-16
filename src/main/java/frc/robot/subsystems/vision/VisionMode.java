@@ -19,7 +19,9 @@ public class VisionMode extends SubsystemBase {
   public SPI spi0 = new SPI(Port.kOnboardCS0);
   public SPI spi2 = new SPI(Port.kOnboardCS2);
   public SPI spi3 = new SPI(Port.kOnboardCS3);
-
+  /**
+   * Creates a new VisionMode.
+   */
   public VisionMode() {
     
   }
@@ -28,22 +30,27 @@ public class VisionMode extends SubsystemBase {
     SmartDashboard.putNumber("Vision Mode", mode);
     System.out.println("Vision Mode: " + mode);
     
+    //System.out.println(mode);
     if(mode == 0){
+     // light.set(false);
       spi0.setChipSelectActiveHigh(); 
       spi2.setChipSelectActiveHigh(); 
       spi3.setChipSelectActiveHigh();
     } else if(mode == 1){
       // control panel
+      //light.set(false);
       spi0.setChipSelectActiveHigh(); 
       spi2.setChipSelectActiveLow(); 
       spi3.setChipSelectActiveLow();
     } else if(mode == 2){
       // ball collector pixy
+     // light.set(false);
       spi0.setChipSelectActiveLow(); 
       spi2.setChipSelectActiveHigh(); 
       spi3.setChipSelectActiveLow();
     } else if(mode == 3){
       // ball shooter
+     // light.set(true);
       spi0.setChipSelectActiveLow(); 
       spi2.setChipSelectActiveLow(); 
       spi3.setChipSelectActiveHigh();
@@ -52,5 +59,6 @@ public class VisionMode extends SubsystemBase {
 
   @Override
   public void periodic() {
+    // This method will be called once per scheduler run
   }
 }
